@@ -312,10 +312,10 @@ namespace jsk_rviz_plugins
     int current_width = animation_t_ / animate_duration * overlay_->getTextureWidth();
     int current_height = animation_t_ / animate_duration * overlay_->getTextureHeight();
     {
-      ScopedPixelBuffer buffer = overlay_->getBuffer();
+      ScopedPixelBufferPtr buffer = overlay_->getBuffer();
       QColor bg_color(0, 0, 0, 255.0 / 2.0);
       QColor transparent(0, 0, 0, 0.0);
-      QImage Hud = buffer.getQImage(*overlay_);
+      QImage Hud = buffer->getQImage(*overlay_);
       for (int i = 0; i < overlay_->getTextureWidth(); i++) {
         for (int j = 0; j < overlay_->getTextureHeight(); j++) {
           if (i > (overlay_->getTextureWidth() - current_width) / 2.0 &&
@@ -345,10 +345,10 @@ namespace jsk_rviz_plugins
     ROS_DEBUG("redraw");
     prepareOverlay();
     {
-      ScopedPixelBuffer buffer = overlay_->getBuffer();
+      ScopedPixelBufferPtr buffer = overlay_->getBuffer();
       QColor bg_color(0, 0, 0, 255.0 / 2.0);
       QColor fg_color(25, 255, 240, 255.0);
-      QImage Hud = buffer.getQImage(*overlay_, bg_color);
+      QImage Hud = buffer->getQImage(*overlay_, bg_color);
       QPainter painter( &Hud );
       painter.setRenderHint(QPainter::Antialiasing, true);
       painter.setPen(QPen(fg_color, 1, Qt::SolidLine));

@@ -223,8 +223,8 @@ namespace jsk_rviz_plugins
             cv::merge(channels, mat);
         }
 
-        ScopedPixelBuffer buffer = overlay_->getBuffer();
-        QImage Hud = buffer.getQImage(*overlay_);
+        ScopedPixelBufferPtr buffer = overlay_->getBuffer();
+        QImage Hud = buffer->getQImage(*overlay_);
         // QImage created from ScopedPixelBuffer has no padding between each line.
         memcpy(Hud.scanLine(0), mat.data, mat.cols * mat.rows * mat.elemSize());
       }
