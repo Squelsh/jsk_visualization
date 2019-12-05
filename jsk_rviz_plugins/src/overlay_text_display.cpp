@@ -225,8 +225,8 @@ namespace jsk_rviz_plugins
     }
     overlay_->updateTextureSize(texture_width_, texture_height_);
     {
-      ScopedPixelBuffer buffer = overlay_->getBuffer();
-      QImage Hud = buffer.getQImage(*overlay_, bg_color_);
+      ScopedPixelBufferPtr buffer = overlay_->getBuffer();
+      QImage Hud = buffer->getQImage(*overlay_, bg_color_);
       QPainter painter( &Hud );
       painter.setRenderHint(QPainter::Antialiasing, true);
       painter.setPen(QPen(fg_color_, line_width_ || 1, Qt::SolidLine));

@@ -56,6 +56,7 @@
   #include <OGRE/Overlay/OgreOverlayManager.h>
 #endif
 
+#include <boost/shared_ptr.hpp>
 #include <QImage>
 #include <QColor>
 
@@ -81,6 +82,7 @@ namespace jsk_rviz_plugins
     
   };
 
+  typedef boost::shared_ptr<ScopedPixelBuffer> ScopedPixelBufferPtr;
   
   // this is a class for put overlay object on rviz 3D panel.
   // This class suppose to be instantiated in onInitialize method
@@ -102,7 +104,7 @@ namespace jsk_rviz_plugins
     virtual void show();
     virtual bool isTextureReady();
     virtual bool updateTextureSize(unsigned int width, unsigned int height);
-    virtual ScopedPixelBuffer getBuffer();
+    virtual ScopedPixelBufferPtr getBuffer();
     virtual void setPosition(double left, double top);
     virtual void setDimensions(double width, double height);
     virtual bool isVisible();

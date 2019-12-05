@@ -174,16 +174,18 @@ namespace jsk_rviz_plugins
         ->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
     }
   }
-
-  ScopedPixelBuffer OverlayObject::getBuffer()
-  {
-    if (isTextureReady()) {
-      return ScopedPixelBuffer(texture_->getBuffer());
-    }
-    else {
-      return ScopedPixelBuffer(Ogre::HardwarePixelBufferSharedPtr());
-    }
-  }
+  
+   ScopedPixelBufferPtr OverlayObject::getBuffer()
+   {
+    ScopedPixelBufferPtr sharPtr;
+     if (isTextureReady()) {
+       sharPtr.reset(new ScopedPixelBuffer(texture_->getBuffer()));
+     }
+     else {
+       sharPtr.reset(new ScopedPixelBuffer(Ogre::HardwarePixelBufferSharedPtr()));
+     }
+     return sharPtr;
+   }
 
   void OverlayObject::setPosition(double left, double top)
   {
